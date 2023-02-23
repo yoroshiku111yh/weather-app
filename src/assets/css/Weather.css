@@ -1,0 +1,122 @@
+.weather-wrapper {
+    position: relative;
+    display: block;
+    max-width: 343px;
+    margin: 0 auto;
+    padding: 10px 20px 20px 20px;
+    background-color: rgba(0, 16, 38, 0.5);
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.weather-headline {
+    display: flex;
+    flex-direction: row;
+}
+
+.weather-headline > h4 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+    text-align: left;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.weather-headline > div {
+    margin-left: auto;
+    font-size: 20px;
+    font-weight: 200;
+    color: #fff;
+}
+
+.weather-col__temp{
+    font-size: 18px;
+    font-weight: 400;
+    color : #fff;
+    text-align: center;
+    display: block;
+}
+
+.weather-col__img{
+    display: block;
+    max-width: 43px;
+    padding : 10px 0px;
+}
+
+.weather-col__img img{
+    width: 100%;
+}
+
+.weather-col__time{
+    font-size: 18px;
+    font-weight: 400;
+    color : #fff;
+    text-align: center;
+    display: block;
+}
+
+.weather-table-row {
+    list-style-type: none;
+    text-align: left;
+    padding: 0;
+    margin: 0;
+    margin-top: 20px;
+}
+
+.weather-table-row li {
+    list-style-type: none;
+    margin: 0;
+    display: inline-block;
+    padding: 10px;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+.weather-table-row li.active{
+    background-color: #cccccc3d;
+}
+
+.weather-table li:last-child {
+    margin-right: 0;
+}
+
+.weather-table-col{
+    padding : 0;
+    margin : 0;
+    margin-top : 15px;
+}
+
+.weather-table-col li{
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 5px;
+}
+
+.weather-row__date{
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.25;
+    color : #fff;
+    margin-right : auto;
+    align-self: center;
+}
+
+.weather-row__icon{
+    max-width: 45px;
+    margin : 0 auto;
+    align-self: center;
+}
+
+.weather-row__icon img{
+    width: 100%;
+}
+
+.weather-row__temp{
+    font-size: 18px;
+    font-weight: 400;
+    color : #fff;
+    margin-left: auto;
+    align-self: center;
+}

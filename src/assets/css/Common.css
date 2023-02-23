@@ -1,0 +1,9 @@
+.temp-text__big {
+    font-size: 64px;
+    font-weight: 600;
+    text-align: center;
+    color: #fff;
+    margin: 0;
+    line-height: 1.35;
+    transform: translateX(10px);
+}
