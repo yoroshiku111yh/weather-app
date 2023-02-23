@@ -5,6 +5,10 @@ import { useEffect } from 'react';
 import { getHourlyWeather } from '../slice/sliceHourly';
 import { getStatusWeather } from './../variable';
 
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+
 function ContainerDetail() {
     const dispatch = useDispatch();
     const stateHourly = useSelector((state) => state.hourly);
@@ -53,29 +57,42 @@ function OverviewWeather({ location, maxTemp, minTemp, weatherStatus, currentTem
 }
 
 function HourlyWeatherTable({ data }) {
-    const listWeather = data.map((item) => (
-        <li className="active">
-            <div className='weather-col__temp'>
-                {item.temp}<span>°</span>
+    const listWeather = data.map((item, index) => (
+        <div key={index}>
+            <div className='active weather-table-row__item'>
+                <div className='weather-col__temp'>
+                    {item.temp}<span>°</span>
+                </div>
+                <div className='weather-col__img'>
+                    <img src={imgIconCloud} />
+                </div>
+                <div className='weather-col__time'>
+                    {item.time < 10 ? "0" + item.time : item.time}:00
+                </div>
             </div>
-            <div className='weather-col__img'>
-                <img src={imgIconCloud} />
-            </div>
-            <div className='weather-col__time'>
-                {item.time}:00
-            </div>
-        </li>
-    ))
+        </div>
+    ));
+    const settings = {
+        speed: 500,
+        infinite: false,
+        slidesToShow: 4,
+        slidesToScroll: 3,
+        variableWidth: true,
+        arrows: false,
+        dots: false,
+    }
     return (
         <>
             <div className='weather-wrapper'>
                 <div className='weather-headline'>
                     <h4>Today</h4>
-                    <div>Mar, 9</div>
+                    <div>{ `${getMonthName(new Date().getMonth())}, ${new Date().getDay()}`}</div>
                 </div>
-                <ul className='weather-table-row'>
-                    {listWeather}
-                </ul>
+                <div className='weather-table-row'>
+                    <Slider {...settings}>
+                        {listWeather}
+                    </Slider>
+                </div>
             </div>
         </>
     )
@@ -87,8 +104,8 @@ function getOverviewWeatherData(data) {
     let weatherStatus = "";
     let currentTemp = "";
     if (Object.keys(data).length !== 0) {
-        const tempInDay = data.hourly.temperature_2m.slice(0, 23);
-        const weatherStatusInDay = data.hourly.weathercode.slice(0, 23);
+        const tempInDay = data.hourly.temperature_2m.slice(0, 24);
+        const weatherStatusInDay = data.hourly.weathercode.slice(0, 24);
         const currentHour = new Date().getHours();
 
         weatherStatus = getStatusWeather(weatherStatusInDay[currentHour]);
@@ -107,11 +124,11 @@ function getOverviewWeatherData(data) {
 function getDataWeatherTableHourly(data) {
     let ar = [];
     if (Object.keys(data).length !== 0) {
-        const tempInDay = data.hourly.temperature_2m.slice(0, 23);
-        const weatherStatusInDay = data.hourly.weathercode.slice(0, 23);
-        const hourly = data.hourly.time.slice(0, 23);
+        const tempInDay = data.hourly.temperature_2m.slice(0, 24);
+        const weatherStatusInDay = data.hourly.weathercode.slice(0, 24);
+        const hourly = data.hourly.time.slice(0, 24);
 
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 24; i++) {
             let obj = {};
             let time = hourly[i];
             let weather = weatherStatusInDay[i];
@@ -124,5 +141,9 @@ function getDataWeatherTableHourly(data) {
     }
     return ar;
 }
+
+function getMonthName(monthNumber) {
+    return new Date('1999-' + monthNumber + '-15').toLocaleString('en-us', { month: 'long' })
+  }
 
 export default ContainerDetail;

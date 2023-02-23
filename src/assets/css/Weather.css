@@ -64,20 +64,22 @@
     margin-top: 20px;
 }
 
-.weather-table-row li {
+.weather-table-row .weather-table-row__item {
     list-style-type: none;
     margin: 0;
     display: inline-block;
     padding: 10px;
     border-radius: 10px;
     margin-right: 20px;
+    text-align: center;
+    box-sizing: border-box;
 }
 
-.weather-table-row li.active{
+.weather-table-row .weather-table-row__item.active{
     background-color: #cccccc3d;
 }
 
-.weather-table li:last-child {
+.weather-table .weather-table-row__item:last-child {
     margin-right: 0;
 }
 
