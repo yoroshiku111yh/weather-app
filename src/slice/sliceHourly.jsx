@@ -1,6 +1,7 @@
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { apiUrlWeatherDetailToday } from './../variable';
+import { dummyDataHourly } from '../dummy-data';
+import { apiUrlWeatherDetailToday, IS_LOCAL } from './../variable';
 
 const testAPI = apiUrlWeatherDetailToday();
 
@@ -8,7 +9,7 @@ export const getHourlyWeather = createAsyncThunk(
     'hourly/get',
     async (data, { rejectWithValue }) => {
         const response = await fetch(
-            'https://api.open-meteo.com/v1/forecast?latitude=10.82&longitude=106.63&hourly=temperature_2m,weathercode',
+            testAPI,
             {
                 method: "GET",
                 headers: {
@@ -32,7 +33,7 @@ export const sliceHourly = createSlice({
         data: {},
         isLoading: false,
         errorMessage: null,
-        isError: false
+        isError: false,
     },
     extraReducers: (builder) => {
         builder.addCase(getHourlyWeather.pending, (state) => {
@@ -47,7 +48,9 @@ export const sliceHourly = createSlice({
             state.isLoading = false;
             state.isError = true;
             state.errorMessage = action.error.message;
-            console.log(action);
+            if(IS_LOCAL){
+                state.data = dummyDataHourly;
+            }
         });
     }
 })

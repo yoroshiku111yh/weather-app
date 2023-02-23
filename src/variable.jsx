@@ -2,7 +2,9 @@ export const apiUrlWeatherDetailToday = (lat = "10.82", long = "106.63") => {
     return `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&hourly=temperature_2m,weathercode`
 }
 
-export const STATUS_WEATHER_CODE = (weatherCode) => {
+export const IS_LOCAL = true;
+
+export const getStatusWeather = (weatherCode) => {
     switch(weatherCode){
         case 0 :
             return "Clear sky";
@@ -45,5 +47,7 @@ export const STATUS_WEATHER_CODE = (weatherCode) => {
         case 96:
         case 99:
             return "Thunderstorm heavy hail";
+        default :
+            return "-.-";
     }
 }
