@@ -5,7 +5,8 @@ export const sliceLocation = createSlice({
     initialState : {
         lang : "",
         lat : "",
-        name : "Ho Chi Minh city"
+        name : "Ho Chi Minh city",
+        timezone: 'Asia/Singapore'
     },
     reducers : {
         update: (state, action) => {

@@ -353,9 +353,9 @@ export const dummyDataHourly = {
             23.6
         ],
         "weathercode": [
+            0,
             3,
-            3,
-            3,
+            0,
             3,
             2,
             1,

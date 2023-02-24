@@ -7,8 +7,6 @@ import './assets/css/Weather.css';
 import ContainerWeeklyTable from './Containers/ContainerWeeklyTable';
 import ContainerDetail from './Containers/ContainerDetail';
 
-import cities from 'cities.json';
-
 function App (){
     return(
         <div className='container test-bg'>

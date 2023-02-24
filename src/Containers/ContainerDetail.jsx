@@ -1,5 +1,3 @@
-import imgWeatherCloudRain from '../assets/rain-cloud.png';
-import imgIconCloud from '../assets/ico-cloud.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getHourlyWeather } from '../slice/sliceHourly';
@@ -18,7 +16,6 @@ function ContainerDetail() {
     }, []);
     const data = getOverviewWeatherData(stateHourly.data);
     const dataTable = getDataWeatherTableHourly(stateHourly.data);
-    console.log(dataTable);
     return (
         <>
             <OverviewWeather
@@ -37,7 +34,7 @@ function OverviewWeather({ location, maxTemp, minTemp, weatherStatus, currentTem
     return (
         <>
             <div className="weather-detail__icon">
-                <img src={imgWeatherCloudRain} alt="weather-rain-cloud" />
+                <img src={weatherStatus.iconBig} alt="weather-rain-cloud" />
             </div>
             <div className='weather-detail__info'>
                 <h3 className='weather-detail__location '>{location}</h3>
@@ -45,7 +42,7 @@ function OverviewWeather({ location, maxTemp, minTemp, weatherStatus, currentTem
                     {currentTemp}<span>°</span>
                 </h4>
                 <div className='weather-detail__status '>
-                    {weatherStatus}
+                    {weatherStatus.text}
                 </div>
                 <div className='weather-detail__temp-range '>
                     <div>Max : {maxTemp}<span>°</span></div>
@@ -64,7 +61,7 @@ function HourlyWeatherTable({ data }) {
                     {item.temp}<span>°</span>
                 </div>
                 <div className='weather-col__img'>
-                    <img src={imgIconCloud} />
+                    <img src={item.weatherStatus.iconSmall} />
                 </div>
                 <div className='weather-col__time'>
                     {item.time < 10 ? "0" + item.time : item.time}:00
@@ -98,10 +95,10 @@ function HourlyWeatherTable({ data }) {
     )
 }
 
-function getOverviewWeatherData(data) {
+function getOverviewWeatherData(data = {}) {
     let maxTemp = "";
     let minTemp = "";
-    let weatherStatus = "";
+    let weatherStatus = {};
     let currentTemp = "";
     if (Object.keys(data).length !== 0) {
         const tempInDay = data.hourly.temperature_2m.slice(0, 24);
@@ -121,7 +118,7 @@ function getOverviewWeatherData(data) {
     }
 }
 
-function getDataWeatherTableHourly(data) {
+function getDataWeatherTableHourly(data = {}) {
     let ar = [];
     if (Object.keys(data).length !== 0) {
         const tempInDay = data.hourly.temperature_2m.slice(0, 24);

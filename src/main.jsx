@@ -6,9 +6,11 @@ import App from './App'
 import './assets/css/index.css'
 import { sliceHourly } from './slice/sliceHourly'
 import { sliceLocation } from './slice/sliceLocation'
+import { sliceWeekly } from './slice/sliceWeekly'
 
 const rootReducer = combineReducers({
     hourly: sliceHourly.reducer,
+    weekly : sliceWeekly.reducer,
     location: sliceLocation.reducer,
 })
 
