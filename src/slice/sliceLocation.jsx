@@ -10,7 +10,8 @@ export const sliceLocation = createSlice({
     },
     reducers : {
         update: (state, action) => {
-            state.name = action.payload
+            //console.log(action.payload);
+            state = {...state,...action.payload};
         }
     }
 });

@@ -34,7 +34,6 @@
     font-size: 18px;
     font-weight: 400;
     color : #fff;
-    text-align: center;
     display: block;
 }
 
@@ -121,4 +120,14 @@
     color : #fff;
     margin-left: auto;
     align-self: center;
+}
+
+.weather-table-col .weather-row__date{
+    text-align: left;
+    width : 35%;
+}
+
+.weather-table-col .weather-row__temp{
+    text-align: right;
+    width : 35%;
 }

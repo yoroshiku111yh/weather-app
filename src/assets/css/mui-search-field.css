@@ -1,0 +1,29 @@
+.search-field{
+    padding : 35px 15px 10px 15px;
+}
+
+.mui-search-input.MuiAutocomplete-root{
+    margin : 0 auto;
+    display: block;
+    width : 85%;
+}
+
+.mui-search-input .MuiOutlinedInput-notchedOutline{
+    border-color: transparent;
+}
+
+.mui-search-input .css-154xyx0-MuiInputBase-root-MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline{
+    border-color: transparent;
+}
+
+.mui-search-input .MuiFormLabel-root{
+    color : #fff;
+}
+
+.mui-search-input .MuiSvgIcon-root{
+    fill : #fff;
+}
+
+.mui-search-input .MuiInputBase-input{
+    color : #fff;
+}

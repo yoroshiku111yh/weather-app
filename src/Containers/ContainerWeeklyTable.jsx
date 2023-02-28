@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getWeeklyWeather } from './../slice/sliceWeekly';
 import { useEffect } from 'react';
 import { getStatusWeather } from './../variable';
+import WeeklyTable from '../Components/WeeklyTable';
+import { roundedToFixed } from '../func';
 
 function ContainerWeeklyTable() {
     const dispatch = useDispatch();
@@ -11,29 +13,13 @@ function ContainerWeeklyTable() {
     useEffect(() => {
         dispatch(getWeeklyWeather());
     }, []);
-    const dataTable = getDataTableWeekly(stateWeekly.data);
-    const listData = dataTable.map((item, index) => (
-        <li key = {index}>
-            <div className='weather-row__date'>
-                {item.time}
-            </div>
-            <div className='weather-row__icon'>
-                <img src={item.weatherStatus.iconSmall} />
-            </div>
-            <div className='weather-row__temp'>
-                {item.temp}<span>°</span>
-            </div>
-        </li>
-    ))
+    const data = getDataTableWeekly(stateWeekly.data);
     return (
         <div className='weather-wrapper'>
             <div className='weather-headline'>
-                <h4>Next Forecast</h4>
-                <div></div>
+                <h4>Weekly Forecast</h4>
             </div>
-            <ul className='weather-table-col'>
-                { listData }
-            </ul>
+            <WeeklyTable data={data} />
         </div>
     )
 }
@@ -55,11 +41,6 @@ function getDataTableWeekly(data = {}) {
         }
     }
     return ar;
-}
-
-function roundedToFixed(input, digits) {
-    var rounder = Math.pow(10, digits);
-    return (Math.round(input * rounder) / rounder).toFixed(digits);
 }
 
 export default ContainerWeeklyTable;
