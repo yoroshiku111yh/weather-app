@@ -19,7 +19,6 @@ export const getHourlyWeather = createAsyncThunk(
             }
         );
         const jsonData = await response.json();
-        console.log(jsonData);
         if (response.status < 200 || response.status >= 300) {
             return rejectWithValue(jsonData);
         }
@@ -35,6 +34,11 @@ export const sliceHourly = createSlice({
         errorMessage: null,
         isError: false,
     },
+    reducers : {
+        updateDummy : ( state, action ) => {
+            return state = {...state, ...{data : action.payload}};
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(getHourlyWeather.pending, (state) => {
             state.isLoading = true;
@@ -48,9 +52,9 @@ export const sliceHourly = createSlice({
             state.isLoading = false;
             state.isError = true;
             state.errorMessage = action.error.message;
-            if(IS_LOCAL){
-                state.data = dummyDataHourly;
-            }
+            // if(IS_LOCAL){
+            //     state.data = dummyDataHourly;
+            // }
         });
     }
 })

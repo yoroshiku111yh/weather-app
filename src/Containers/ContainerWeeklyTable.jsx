@@ -1,18 +1,28 @@
 
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getWeeklyWeather } from './../slice/sliceWeekly';
+import { getWeeklyWeather, sliceWeekly } from './../slice/sliceWeekly';
 import { useEffect } from 'react';
-import { getStatusWeather } from './../variable';
+import { getStatusWeather, IS_LOCAL } from './../variable';
 import WeeklyTable from '../Components/WeeklyTable';
 import { roundedToFixed } from '../func';
+import { getDummyData } from './../func';
 
 function ContainerWeeklyTable() {
     const dispatch = useDispatch();
     const stateWeekly = useSelector(state => state.weekly);
+
+    const stateLocation = useSelector(state => state.location);
+
     useEffect(() => {
-        dispatch(getWeeklyWeather());
-    }, []);
+        if(!IS_LOCAL){
+            dispatch(getWeeklyWeather());
+        }else{
+            const getDummy = getDummyData(stateLocation.name);
+            dispatch(sliceWeekly.actions.updateDummy(getDummy.weekly));
+        }
+    }, [stateLocation.name]);
+    
     const data = getDataTableWeekly(stateWeekly.data);
     return (
         <div className='weather-wrapper'>

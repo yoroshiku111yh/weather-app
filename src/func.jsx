@@ -1,3 +1,5 @@
+import { dummyDataHourlyHaNoi, dummyDataHourlyLondon, dummyDataHourlyTokyo, dummyDataHourly, dummyDataHourlyOsaka, dummyDataHourlyNewyork } from "./dummy-data";
+import { dummyDataWeeklyHaNoi, dummyDataWeeklyLondon, dummyDataWeeklyTokyo, dummyDataWeekly, dummyDataWeeklyOsaka, dummyDataWeeklyNewyork } from "./dummy-data-weekly";
 import { getStatusWeather } from "./variable";
 
 export const getOverviewWeatherData = (data = {}) => {
@@ -56,4 +58,41 @@ export const getDataWeatherTableHourly = (data = {}) => {
 export const roundedToFixed = (input, digits) => {
     var rounder = Math.pow(10, digits);
     return (Math.round(input * rounder) / rounder).toFixed(digits);
+}
+
+
+export const getDummyData = (nameLocation) => {
+    switch(nameLocation){
+        case "Ha Noi" :
+            return {
+                hourly : dummyDataHourlyHaNoi,
+                weekly : dummyDataWeeklyHaNoi
+            };
+        case "Tokyo" :
+            return {
+                hourly : dummyDataHourlyTokyo,
+                weekly : dummyDataWeeklyTokyo
+            }
+        case "Osaka" :
+            return {
+                hourly : dummyDataHourlyOsaka,
+                weekly : dummyDataWeeklyOsaka
+            }
+        case "Newyork" :
+            return {
+                hourly : dummyDataHourlyNewyork,
+                weekly : dummyDataWeeklyNewyork
+            }
+        case "London" :
+            return {
+                hourly : dummyDataHourlyLondon,
+                weekly : dummyDataWeeklyLondon
+            }
+        case "Ho Chi Minh":
+        default :
+            return {
+                hourly : dummyDataHourly,
+                weekly : dummyDataWeekly
+            }
+    }
 }
